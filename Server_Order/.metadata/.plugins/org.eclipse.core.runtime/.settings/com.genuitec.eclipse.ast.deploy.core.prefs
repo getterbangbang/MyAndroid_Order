@@ -1,0 +1,14 @@
+#Mon Dec 10 08:58:24 CST 2018
+tomcat7Server.MyAndroid_Server_Order.IEARProjectName=
+tomcat7Server.MyAndroid_Server_Order.deploymentPath=C\:\\apache-tomcat-7.0.42\\webapps\\MyAndroid_Server_Order
+tomcat7Server.MyAndroid_Server_Order.shouldBackup=false
+tomcat7Server.MyAndroid_Server_Order.deployIsOverProject=false
+tomcat7Server.MyAndroid_Server_Order.isDeployed=true
+tomcat7Server.MyAndroid_Server_Order.noFileCopy=false
+tomcat7Server.MyAndroid_Server_Order.type=WebDeployment
+tomcat7Server.MyAndroid_Server_Order.isExploded=true
+tomcat7Server.MyAndroid_Server_Order.contextRoot=/MyAndroid_Server_Order
+eclipse.preferences.version=1
+tomcat7Server.MyAndroid_Server_Order.isUptoDate=true
+tomcat7Server.MyAndroid_Server_Order.shouldOverwrite=false
+tomcat7Server.MyAndroid_Server_Order.altContextRoot=

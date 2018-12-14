@@ -1,0 +1,22 @@
+package service;
+
+import java.util.List;
+import java.util.Map;
+
+import dao.UserDao;
+import entity.User;
+
+public class UserService {
+	private UserDao userDao=new UserDao();
+
+	public User login(String username, String password) {
+		
+		return userDao.findByUsername(username,password);
+	}
+
+	public List<Map<String, Object>> getAllDingdan(String userid) {
+		// TODO Auto-generated method stub
+		return userDao.findOrdersByUserid(userid);
+	}
+
+}

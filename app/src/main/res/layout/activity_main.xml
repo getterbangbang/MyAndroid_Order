@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+    <TextView
+        android:id="@+id/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点餐"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_below="@+id/title_main"
+        android:layout_above="@+id/radio_group_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/diancan"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="点餐"/>
+        <RadioButton
+            android:id="@+id/gouwuche"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="购物车"/>
+        <RadioButton
+            android:id="@+id/dingdan"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="订单"/>
+        <RadioButton
+            android:id="@+id/wode"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="我的"/>
+
+    </RadioGroup>
+</RelativeLayout>

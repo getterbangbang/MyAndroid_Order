@@ -1,0 +1,37 @@
+package service;
+
+import java.util.List;
+import java.util.Map;
+
+import dao.UserDao;
+import entity.User;
+
+public class UserService {
+	private UserDao userDao=new UserDao();
+
+	public User login(String username, String password) {
+		
+		return userDao.findByUsername(username,password);
+	}
+
+	public List<Map<String, Object>> getAllDingdan(String userid) {
+		return userDao.findOrdersByUserid(userid);
+	}
+
+	public List<Map<String, Object>> getMyCart(String userid) {
+		return userDao.findCartByUserid(userid);
+	}
+
+	public List<Map<String, Object>> getHotList() {
+		return userDao.findHotFood();
+	}
+
+	public List<Map<String, Object>> getTypeList() {
+		return userDao.findTypeList();
+	}
+
+	public List<Map<String, Object>> getOneMenu(String typeid) {
+		return userDao.findMenuByTypeid(typeid);
+	}
+
+}

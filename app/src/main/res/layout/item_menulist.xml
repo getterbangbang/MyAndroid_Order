@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_food"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher_round" />
+    <RelativeLayout
+        android:layout_toRightOf="@+id/img_food"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp">
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大盘鸡"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/food_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="销量：20"
+            android:layout_below="@+id/food_name"/>
+        <TextView
+            android:id="@+id/food_prize"
+            android:textColor="@color/colorAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥40"
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_menulist"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加"/>
+
+</RelativeLayout>
