@@ -76,7 +76,7 @@ public class UserDao {
 		JDBCUtil.update(sql, ordername,userid,orderids,prizesum,"“—Ã·Ωª",dateString);
 		
 		String sql2="update cart set isbuy=1 where userid=? and isbuy=0";
-		JDBCUtil.update(sql2,userid);
+		JDBCUtil.update(sql,userid);
 		
 	}
 	

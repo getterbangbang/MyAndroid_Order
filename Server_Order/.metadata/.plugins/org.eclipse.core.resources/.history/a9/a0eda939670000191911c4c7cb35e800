@@ -55,10 +55,4 @@ public class UserService {
 		
 	}
 
-	public void creatOrder(String ordername, String userid, String orderids,
-			String prizesum, String dateString) {
-		userDao.insertOrder(ordername,userid,orderids,prizesum,dateString);
-		
-	}
-
 }

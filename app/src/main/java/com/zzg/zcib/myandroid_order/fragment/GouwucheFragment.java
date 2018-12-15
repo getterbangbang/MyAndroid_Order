@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -31,6 +32,8 @@ import com.zzg.zcib.myandroid_order.adapter.GouwucheAdapter;
 import com.zzg.zcib.myandroid_order.utils.HttpServer;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -68,7 +71,33 @@ public class GouwucheFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            String orderids="";
+            for (int i = 0; i < list.size(); i++) {
+                orderids=orderids+list.get(i).get("id").toString()+",";
+            }
+            final JSONObject jsonObject =new JSONObject();
+            try {
+                jsonObject.put("ordername",list.get(0).get("foodname").toString()+"等");
+                jsonObject.put("userid",userid);
+                jsonObject.put("orderids",orderids);
+                jsonObject.put("prizesum",gouwuchePrize.getText().toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             //购买按钮，生成订单
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                    HttpServer httpServer=new HttpServer();
+
+                    String result=httpServer.postHtppByOkHttp(url,"creatOrder",jsonObject.toString());
+
+                }
+            }.start();
+            initData();
+            Toast.makeText(getContext(),"订单已生成",Toast.LENGTH_SHORT).show();
         }
     }
 

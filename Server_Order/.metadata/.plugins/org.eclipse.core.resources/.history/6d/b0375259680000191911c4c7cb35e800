@@ -70,13 +70,10 @@ public class UserDao {
 		
 	}
 
-	public void insertOrder(String ordername, String userid, String orderids,
+	public void insertOrder(String ordername, String userid, String foodids,
 			String prizesum, String dateString) {
-		String sql="insert into orders(ordername,userid,orderids,prizesum,statue,time) value(?,?,?,?,?,?)";
-		JDBCUtil.update(sql, ordername,userid,orderids,prizesum,"已提交",dateString);
-		
-		String sql2="update cart set isbuy=1 where userid=? and isbuy=0";
-		JDBCUtil.update(sql2,userid);
+		String sql="insert into order(ordername,userid,foodids,prizesum,statue,time) value(?,?,?,?,?,?)";
+		JDBCUtil.update(sql, ordername,userid,foodids,prizesum,"已提交",dateString);
 		
 	}
 	

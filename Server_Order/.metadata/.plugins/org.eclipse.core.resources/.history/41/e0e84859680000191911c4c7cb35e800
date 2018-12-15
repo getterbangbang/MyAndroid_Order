@@ -70,7 +70,7 @@ private void creatOrder(HttpServletRequest request,
 	
 	String ordername=json.getString("ordername");
 	String userid=json.getString("userid");
-	String orderids=json.getString("orderids");
+	String foodids=json.getString("foodids");
 	String prizesum=json.getString("prizesum");
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -80,7 +80,7 @@ private void creatOrder(HttpServletRequest request,
 	
 	
 	
-	userService.creatOrder(ordername,userid,orderids,prizesum,dateString);
+	userService.creatOrder(ordername,userid,foodids,prizesum,dateString);
 		
 	}
 

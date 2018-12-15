@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,36 +52,11 @@ public class UserServlet extends HttpServlet {
 			getCart(request,response);
 		}else if("updateFoodCount".equals(action)){
 			updateFoodCount(request,response);
-		}else if("creatOrder".equals(action)){
-			creatOrder(request,response);
 		}
 
 
 	}
 	
-private void creatOrder(HttpServletRequest request,
-			HttpServletResponse response) {
-	String s=request.getParameter("s");
-	JSONObject json=new JSONObject(s);
-
-	
-	String ordername=json.getString("ordername");
-	String userid=json.getString("userid");
-	String orderids=json.getString("orderids");
-	String prizesum=json.getString("prizesum");
-	
-	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	Calendar calendar=Calendar.getInstance();
-	Date date=calendar.getTime();
-	String dateString=sdf.format(date);
-	
-	
-	
-	userService.creatOrder(ordername,userid,orderids,prizesum,dateString);
-		
-	}
-
-
 private void updateFoodCount(HttpServletRequest request,
 			HttpServletResponse response) {
 	String s=request.getParameter("s");
