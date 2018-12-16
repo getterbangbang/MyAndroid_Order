@@ -1,6 +1,7 @@
 package com.zzg.zcib.myandroid_order.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzg.zcib.myandroid_order.R;
+import com.zzg.zcib.myandroid_order.activity.DetailsActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -62,7 +64,8 @@ public class DingdanAdapter extends BaseAdapter{
         viewHolder.details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"详情",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(context, DetailsActivity.class);
+                context.startActivity(intent);
             }
         });
         return convertView;

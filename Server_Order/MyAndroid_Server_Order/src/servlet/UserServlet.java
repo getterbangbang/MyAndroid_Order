@@ -7,6 +7,7 @@ import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import service.UserService;
+import utils.Jpush;
 
 import entity.User;
 
@@ -57,11 +59,29 @@ public class UserServlet extends HttpServlet {
 			updateFoodCount(request,response);
 		}else if("creatOrder".equals(action)){
 			creatOrder(request,response);
+		}else if("testpush".equals(action)){
+			testpush(request,response);
 		}
 
 
 	}
 	
+private void testpush(HttpServletRequest request,
+			HttpServletResponse response) {
+	Map<String, String> parm =new HashMap<String, String>();
+    //这是我的文章id
+    parm.put("id",(""+1).trim());
+    //文章标题
+    parm.put("Atitle","title");
+    //设置提示信息,内容是文章标题
+    parm.put("msg","msgggggg");
+ 
+    //然后调用安卓的
+    Jpush.jpushAndroid(parm);
+		
+	}
+
+
 private void creatOrder(HttpServletRequest request,
 			HttpServletResponse response) {
 	String s=request.getParameter("s");

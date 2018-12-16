@@ -17,9 +17,21 @@
 <fullyQualifiedTypeName name="com.google.gson.JsonParser"/>
 <fullyQualifiedTypeName name="com.google.gson.JsonObject"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONArray"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.PushResult"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="cn.jpush.api.JPushClient"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.PushPayload"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.Platform"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.audience.Audience"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.notification.Notification"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.Options"/>
+<fullyQualifiedTypeName name="cn.jpush.api.push.model.Message"/>
+<fullyQualifiedTypeName name="cn.jiguang.common.resp.APIConnectionException"/>
+<fullyQualifiedTypeName name="cn.jiguang.common.resp.APIRequestException"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="utils.Jpush"/>
 </qualifiedTypeNameHistroy>

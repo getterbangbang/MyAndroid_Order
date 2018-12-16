@@ -106,4 +106,10 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.hide(wodeFragment);
         }
     }
+
+
+
+    private void init(){
+//        JPushInterface.init(getApplicationContext());
+    }
 }
