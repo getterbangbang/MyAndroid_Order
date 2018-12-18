@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.Inflater;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class DingdanAdapter extends BaseAdapter{
 
     private Context context;
@@ -43,7 +45,7 @@ public class DingdanAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.item_dingdanlist,parent,false);
@@ -57,7 +59,7 @@ public class DingdanAdapter extends BaseAdapter{
         }else {
             viewHolder= (ViewHolder) convertView.getTag();
         }
-        viewHolder.imageView.setBackgroundResource(R.mipmap.ic_launcher);
+        viewHolder.imageView.setBackgroundResource(R.drawable.cai);
         viewHolder.name.setText(list.get(position).get("ordername").toString()+"("+list.get(position).get("prizesum").toString()+")");
         viewHolder.time.setText(list.get(position).get("time").toString());
         viewHolder.statue.setText(list.get(position).get("statue").toString());
@@ -65,6 +67,8 @@ public class DingdanAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, DetailsActivity.class);
+                intent.putExtra(JPushInterface.EXTRA_NOTIFICATION_TITLE,"1");
+                intent.putExtra(JPushInterface.EXTRA_ALERT,"id："+list.get(position).get("id").toString());
                 context.startActivity(intent);
             }
         });

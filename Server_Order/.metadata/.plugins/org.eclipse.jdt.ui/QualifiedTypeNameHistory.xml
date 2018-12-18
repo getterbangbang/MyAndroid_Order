@@ -34,4 +34,5 @@
 <fullyQualifiedTypeName name="cn.jiguang.common.resp.APIRequestException"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="utils.Jpush"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

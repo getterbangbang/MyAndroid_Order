@@ -6,8 +6,7 @@
     <ImageView
         android:id="@+id/img_item_dingdan"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:layout_height="50dp" />
     <LinearLayout
         android:layout_toRightOf="@+id/img_item_dingdan"
         android:layout_width="wrap_content"
@@ -19,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="大盘鸡"
+            android:textColor="#000"
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/time_item_dingdan"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
-            android:text="订单详情>"/>
+            android:text="订单详情 >"/>
 
     </LinearLayout>
 

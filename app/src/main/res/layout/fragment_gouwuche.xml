@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_gouwuche"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
     <ListView
         android:layout_above="@+id/bottom"
         android:id="@+id/gouwuchelist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:id="@+id/bottom"

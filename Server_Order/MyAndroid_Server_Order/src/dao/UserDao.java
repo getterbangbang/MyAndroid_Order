@@ -9,10 +9,10 @@ import entity.User;
 
 public class UserDao {
 	
-	public User findByUsername(String username, String password) {
+	public User findByUsername(String username, String password,String role) {
 		User user=null;
-		String sql="select * from user where username=? and password=?";
-		List<Map<String,Object>> list=JDBCUtil.query(sql, username,password);
+		String sql="select * from user where username=? and password=? and role=?";
+		List<Map<String,Object>> list=JDBCUtil.query(sql, username,password,role);
 		if(!list.isEmpty()){
 			user=new User();
 			user.setUsername((String)list.get(0).get("username"));
@@ -70,14 +70,46 @@ public class UserDao {
 		
 	}
 
-	public void insertOrder(String ordername, String userid, String orderids,
-			String prizesum, String dateString) {
-		String sql="insert into orders(ordername,userid,orderids,prizesum,statue,time) value(?,?,?,?,?,?)";
-		JDBCUtil.update(sql, ordername,userid,orderids,prizesum,"已提交",dateString);
+	public long insertOrder(String ordername, String userid, String orderids,
+			String prizesum, String dateString,String tableid) {
+		String sql="insert into orders(ordername,userid,orderids,prizesum,statue,time,tableid) value(?,?,?,?,?,?,?)";
+		long a=JDBCUtil.insert(sql, ordername,userid,orderids,prizesum,"已提交",dateString,tableid);
+		System.out.println("a-------------------"+a);
+		
 		
 		String sql2="update cart set isbuy=1 where userid=? and isbuy=0";
 		JDBCUtil.update(sql2,userid);
 		
+		String sql3="update table_ set isempty=1 where id=?";
+		JDBCUtil.update(sql2,tableid);
+		
+		return a;
+		
+	}
+
+	public List<Map<String, Object>> findOrderById(String orderid) {
+		String sql="select a.*,b.tablenum from orders as a,table_ as b where a.id=? and a.tableid=b.id";
+		return JDBCUtil.query(sql, orderid);
+	}
+
+	public List<Map<String, Object>> findOrderMenuById(String cartid) {
+		String sql="select a.count,b.foodname,b.prize from cart as a,menu as b where a.id=? and a.foodid=b.id";
+		return JDBCUtil.query(sql, cartid);
+	}
+
+	public List<Map<String, Object>> findAllTable() {
+		String sql="select * from table_ where isempty=0";
+		return JDBCUtil.query(sql);
+	}
+
+	public List<Map<String, Object>> findAllOrder() {
+		String sql="select * from orders order by id desc";
+		return JDBCUtil.query(sql);
+	}
+
+	public String findTablenumById(String tableid) {
+		String sql="select tablenum from table_ where id=?";
+		return JDBCUtil.query(sql,tableid).get(0).get("tablenum").toString();
 	}
 	
 }

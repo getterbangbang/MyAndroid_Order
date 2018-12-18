@@ -5,51 +5,98 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
-    <TextView
-        android:id="@+id/title_main"
+    <RelativeLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点餐"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"/>
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@drawable/border_bottom">
+        <TextView
+            android:id="@+id/title_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="点餐"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_toLeftOf="@+id/table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="桌号："
+            android:layout_centerInParent="true"
+            />
+        <Spinner
+
+            android:id="@+id/table"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+    </RelativeLayout>
+
+
 
     <FrameLayout
         android:id="@+id/fragment_content"
-        android:layout_below="@+id/title_main"
+        android:layout_below="@+id/top"
         android:layout_above="@+id/radio_group_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
 
     <RadioGroup
         android:id="@+id/radio_group_bottom"
+        android:background="@drawable/border_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <RadioButton
             android:id="@+id/diancan"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="点餐"/>
+            android:text="点餐"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_diancan"/>
         <RadioButton
             android:id="@+id/gouwuche"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="购物车"/>
+            android:text="购物车"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_cart"/>
         <RadioButton
             android:id="@+id/dingdan"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="订单"/>
+            android:text="订单"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_dingdan"/>
         <RadioButton
             android:id="@+id/wode"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="我的"/>
+            android:text="我的"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_wode" />
 
     </RadioGroup>
 </RelativeLayout>

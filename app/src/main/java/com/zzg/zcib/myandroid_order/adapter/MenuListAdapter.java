@@ -62,7 +62,7 @@ public class MenuListAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.img.setBackgroundResource(R.mipmap.ic_launcher);
+        viewHolder.img.setBackgroundResource(R.drawable.cai);
         viewHolder.name.setText(list.get(position).get("foodname").toString());
         viewHolder.sales.setText("销量："+list.get(position).get("sales").toString());
         viewHolder.prize.setText("¥"+list.get(position).get("prize").toString());

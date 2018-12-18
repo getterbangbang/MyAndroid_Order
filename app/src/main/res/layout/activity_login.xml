@@ -55,16 +55,34 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"/>
-        <Button
-            android:id="@+id/btn_toregister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="去注册"
-            android:textColor="#fff"
-            android:textSize="15dp"
-            android:background="@null"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_toregister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="去注册"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:background="@null"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+            <Button
+                android:id="@+id/btn_go_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="工作人员入口"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:background="@null"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
     </LinearLayout>
+
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class DingdanFragment extends Fragment {
     private DingdanAdapter dingdanAdapter;
     private ListView listView;
     private String userid;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,10 +40,36 @@ public class DingdanFragment extends Fragment {
         listView=view.findViewById(R.id.dingdanlist);
         dingdanAdapter=new DingdanAdapter(getContext(),list);
         listView.setAdapter(dingdanAdapter);
+        swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_dingdan);
+
+        swipeRefreshLayout.setOnRefreshListener(new Refresh());
 
         initData();
         return view;
     }
+
+    private class Refresh implements SwipeRefreshLayout.OnRefreshListener{
+
+        @Override
+        public void onRefresh() {
+
+            initData();
+
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            initData();
+
+//            Log.d("aaaaaaasdddddddddddd",data.toString());
+        }
+    }
+
+
 
     private void initData(){
         new Thread(){

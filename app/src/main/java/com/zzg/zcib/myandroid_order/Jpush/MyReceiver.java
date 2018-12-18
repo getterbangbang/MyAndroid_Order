@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.zzg.zcib.myandroid_order.activity.DetailsActivity;
 import com.zzg.zcib.myandroid_order.activity.RegisterActivity;
 
 import org.json.JSONException;
@@ -56,7 +57,7 @@ public class MyReceiver extends BroadcastReceiver {
 				Toast.makeText(context,"sssssssssssssssss",Toast.LENGTH_SHORT).show();
 
 				//打开自定义的Activity
-				Intent i = new Intent(context, RegisterActivity.class);
+				Intent i = new Intent(context, DetailsActivity.class);
 				i.putExtras(bundle);
 				//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );

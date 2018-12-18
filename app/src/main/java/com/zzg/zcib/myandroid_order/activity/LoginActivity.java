@@ -19,8 +19,9 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsername,etPassword;
-    private Button button;
+    private Button button,goWorkerLogin;
     private String userid;
+
 
 
     @Override
@@ -30,9 +31,20 @@ public class LoginActivity extends AppCompatActivity {
         etUsername=findViewById(R.id.login_username);
         etPassword=findViewById(R.id.login_password);
         button=findViewById(R.id.login_btn);
+        goWorkerLogin=findViewById(R.id.btn_go_worker);
 
         button.setOnClickListener(new LoginClick());
+        goWorkerLogin.setOnClickListener(new WorkerClick());
 
+    }
+
+    private class WorkerClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(LoginActivity.this,LoginWorkerActivity.class);
+            startActivity(intent);
+        }
     }
 
     private class LoginClick implements View.OnClickListener{
@@ -44,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 jsonObject.put("username",etUsername.getText().toString());
                 jsonObject.put("password",etPassword.getText().toString());
+                jsonObject.put("role","customer");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

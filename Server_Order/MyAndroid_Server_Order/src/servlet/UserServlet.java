@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,23 +62,107 @@ public class UserServlet extends HttpServlet {
 			creatOrder(request,response);
 		}else if("testpush".equals(action)){
 			testpush(request,response);
+		}else if("getOneOrder".equals(action)){
+			getOneOrder(request,response);
+		}else if("getOneOrderMenu".equals(action)){
+			getOneOrderMenu(request,response);
+		}else if("getTable".equals(action)){
+			getTable(request,response);
+		}else if("getWorkerAllDingdan".equals(action)){
+			getWorkerAllDingdan(request,response);
 		}
 
 
 	}
 	
+private void getWorkerAllDingdan(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getWorkerAllDingdan();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTable(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTable();
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getOneOrderMenu(HttpServletRequest request,
+			HttpServletResponse response) {
+		String orderids=request.getParameter("s");
+		String[] ids=orderids.split(",");
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		for(int i=0;i<ids.length;i++){
+			System.out.println(ids[i]);
+			List<Map<String,Object>> list1=userService.getOneOrderMenu(ids[i]);
+			list.add(list1.get(0));
+		}
+		
+	
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		
+		
+		try {
+			response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+private void getOneOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+	String orderid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getOneOrder(orderid);
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
 private void testpush(HttpServletRequest request,
 			HttpServletResponse response) {
 	Map<String, String> parm =new HashMap<String, String>();
     //这是我的文章id
     parm.put("id",(""+1).trim());
     //文章标题
-    parm.put("Atitle","title");
+    parm.put("Atitle","通知");
     //设置提示信息,内容是文章标题
-    parm.put("msg","msgggggg");
+    parm.put("msg","订单已完成！订单号：2");
  
     //然后调用安卓的
-    Jpush.jpushAndroid(parm);
+    Jpush.jpushOneAndroid(parm);
 		
 	}
 
@@ -92,6 +177,7 @@ private void creatOrder(HttpServletRequest request,
 	String userid=json.getString("userid");
 	String orderids=json.getString("orderids");
 	String prizesum=json.getString("prizesum");
+	String tableid=json.getString("tableid");
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	Calendar calendar=Calendar.getInstance();
@@ -100,7 +186,7 @@ private void creatOrder(HttpServletRequest request,
 	
 	
 	
-	userService.creatOrder(ordername,userid,orderids,prizesum,dateString);
+	userService.creatOrder(ordername,userid,orderids,prizesum,dateString,tableid);
 		
 	}
 
@@ -237,8 +323,10 @@ private void login(HttpServletRequest request, HttpServletResponse response) {
 		
 		String username=json.getString("username");
 		String password=json.getString("password");
+		String role=json.getString("role");
+		System.out.println(role);
 		
-		User user=userService.login(username, password);
+		User user=userService.login(username, password,role);
 		try {
 			if(user!=null){
 				response.getWriter().write(user.getId());

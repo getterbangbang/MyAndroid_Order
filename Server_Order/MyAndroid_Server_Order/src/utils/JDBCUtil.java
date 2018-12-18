@@ -110,6 +110,33 @@ public class JDBCUtil {
 		return count;
 	}
 	
+	public static long insert(String sql,Object ...pars){
+		Connection conn=null;
+		long autoIncKeyFromApi = -1;  
+		try {
+			conn=getConnection();
+			   // 用这种方法能得到插入自增的id 很好用  
+		    PreparedStatement pstmt = conn.prepareStatement(sql.toString(),PreparedStatement.RETURN_GENERATED_KEYS);  
+		  
+		    for (int i = 0; i < pars.length; i++) {  
+		        pstmt.setObject(i+1, pars[i]);  
+		    }  
+		    pstmt.executeUpdate();   
+		      
+		    
+		    ResultSet rs = pstmt.getGeneratedKeys();  
+		    if (rs.next()) {  
+		      autoIncKeyFromApi = rs.getInt(1);  
+		    }  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	      
+	    return autoIncKeyFromApi; 
+	}
+	
 	
 
 	private static void setParams(PreparedStatement pre, Object... params)

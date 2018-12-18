@@ -7,6 +7,8 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +53,7 @@ public class GouwucheFragment extends Fragment {
     private GouwucheAdapter gouwucheAdapter;
     private List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
     private String userid;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -64,40 +67,73 @@ public class GouwucheFragment extends Fragment {
         gouwucheList.setAdapter(gouwucheAdapter);
         initData();
         gouwucheBtn.setOnClickListener(new BuyClick());
+        swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_gouwuche);
+
+        swipeRefreshLayout.setOnRefreshListener(new Refresh());
+
+
         return view;
+    }
+
+    private class Refresh implements SwipeRefreshLayout.OnRefreshListener{
+
+        @Override
+        public void onRefresh() {
+
+            initData();
+
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            initData();
+
+//            Log.d("aaaaaaasdddddddddddd",data.toString());
+        }
     }
 
     private class BuyClick implements View.OnClickListener{
 
+
         @Override
         public void onClick(View v) {
+//            Log.d("hhhhhhhhhhhhhhhhh",MainActivity.tableid);
             String orderids="";
-            for (int i = 0; i < list.size(); i++) {
-                orderids=orderids+list.get(i).get("id").toString()+",";
-            }
-            final JSONObject jsonObject =new JSONObject();
-            try {
-                jsonObject.put("ordername",list.get(0).get("foodname").toString()+"等");
-                jsonObject.put("userid",userid);
-                jsonObject.put("orderids",orderids);
-                jsonObject.put("prizesum",gouwuchePrize.getText().toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            //购买按钮，生成订单
-            new Thread(){
-                @Override
-                public void run() {
-                    super.run();
-                    String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
-                    HttpServer httpServer=new HttpServer();
-
-                    String result=httpServer.postHtppByOkHttp(url,"creatOrder",jsonObject.toString());
-
+            if (list.size()!=0){
+                for (int i = 0; i < list.size(); i++) {
+                    orderids=orderids+list.get(i).get("id").toString()+",";
                 }
-            }.start();
-            initData();
-            Toast.makeText(getContext(),"订单已生成",Toast.LENGTH_SHORT).show();
+                final JSONObject jsonObject =new JSONObject();
+                try {
+                    jsonObject.put("ordername",list.get(0).get("foodname").toString()+"等");
+                    jsonObject.put("userid",userid);
+                    jsonObject.put("orderids",orderids);
+                    jsonObject.put("prizesum",gouwuchePrize.getText().toString());
+                    jsonObject.put("tableid",MainActivity.tableid);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //购买按钮，生成订单
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                        HttpServer httpServer=new HttpServer();
+
+                        String result=httpServer.postHtppByOkHttp(url,"creatOrder",jsonObject.toString());
+                        initData();
+
+                    }
+                }.start();
+
+                Toast.makeText(getContext(),"订单已生成",Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 
@@ -149,5 +185,6 @@ public class GouwucheFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         userid = ((MainActivity) activity).getUserid();
+
     }
 }

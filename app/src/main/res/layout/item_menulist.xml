@@ -6,8 +6,7 @@
     <ImageView
         android:id="@+id/img_food"
         android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_height="100dp" />
     <RelativeLayout
         android:layout_toRightOf="@+id/img_food"
         android:layout_width="wrap_content"
@@ -18,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="大盘鸡"
+            android:textColor="#000"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/food_sales"
@@ -41,6 +41,7 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加"/>
+        android:text="添加"
+        android:background="@null"/>
 
 </RelativeLayout>
