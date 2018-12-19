@@ -23,7 +23,7 @@ public class UserDao {
 	}
 
 	public List<Map<String, Object>> findOrdersByUserid(String userid) {
-		String sql="select * from orders where userid=?";
+		String sql="select * from orders where userid=? order by id desc";
 		return JDBCUtil.query(sql, userid);
 	}
 
@@ -110,6 +110,11 @@ public class UserDao {
 	public String findTablenumById(String tableid) {
 		String sql="select tablenum from table_ where id=?";
 		return JDBCUtil.query(sql,tableid).get(0).get("tablenum").toString();
+	}
+
+	public List<Map<String, Object>> findTableList() {
+		String sql="select * from table_";
+		return JDBCUtil.query(sql);
 	}
 	
 }

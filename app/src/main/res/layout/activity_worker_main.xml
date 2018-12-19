@@ -7,15 +7,18 @@
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@drawable/border_bottom">
         <TextView
             android:id="@+id/title_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="订单"
-            android:textSize="20sp"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:textColor="#000"
+            android:textSize="25sp"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
 
@@ -27,25 +30,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
 
+
     <RadioGroup
         android:id="@+id/radio_group_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/border_top">
 
+        <RadioButton
+            android:id="@+id/table"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="餐桌"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_table"/>
         <RadioButton
             android:id="@+id/dingdan"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="订单"/>
+            android:text="订单"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_dingdan"/>
         <RadioButton
             android:id="@+id/wode"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_weight="1"
-            android:text="我的"/>
+            android:text="我的"
+            android:button="@null"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/icon_wode"/>
 
     </RadioGroup>
 </RelativeLayout>

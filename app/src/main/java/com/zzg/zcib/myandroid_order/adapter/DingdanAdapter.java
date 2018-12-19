@@ -60,7 +60,7 @@ public class DingdanAdapter extends BaseAdapter{
             viewHolder= (ViewHolder) convertView.getTag();
         }
         viewHolder.imageView.setBackgroundResource(R.drawable.cai);
-        viewHolder.name.setText(list.get(position).get("ordername").toString()+"("+list.get(position).get("prizesum").toString()+")");
+        viewHolder.name.setText(list.get(position).get("ordername").toString()+"(¥"+list.get(position).get("prizesum").toString()+")");
         viewHolder.time.setText(list.get(position).get("time").toString());
         viewHolder.statue.setText(list.get(position).get("statue").toString());
         viewHolder.details.setOnClickListener(new View.OnClickListener() {

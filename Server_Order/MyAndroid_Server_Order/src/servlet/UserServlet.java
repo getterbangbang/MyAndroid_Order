@@ -70,11 +70,29 @@ public class UserServlet extends HttpServlet {
 			getTable(request,response);
 		}else if("getWorkerAllDingdan".equals(action)){
 			getWorkerAllDingdan(request,response);
+		}else if("getTableList".equals(action)){
+			getTableList(request,response);
 		}
 
 
 	}
 	
+private void getTableList(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTableList();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
 private void getWorkerAllDingdan(HttpServletRequest request,
 			HttpServletResponse response) {
 	List<Map<String,Object>> list=userService.getWorkerAllDingdan();

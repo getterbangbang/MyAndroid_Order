@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/item_gouwuche_name"
@@ -16,16 +17,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"/>
+        <TextView
             android:id="@+id/item_gouwuche_prizesum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¥48"
+            android:text="48"
+            android:textColor="@color/colorAccent"
             android:layout_marginRight="10dp"/>
         <Button
             android:id="@+id/item_gouwuche_decreasebtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_jian"
+            android:layout_marginRight="5dp"/>
         <TextView
             android:id="@+id/item_gouwuche_count"
             android:layout_width="wrap_content"
@@ -33,9 +40,10 @@
             android:text="2"/>
         <Button
             android:id="@+id/item_gouwuche_addbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"/>
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_add"
+            android:layout_marginLeft="5dp"/>
     </LinearLayout>
 
 

@@ -17,18 +17,31 @@
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/border_top">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总价：¥"
+            android:textSize="20sp"/>
         <TextView
             android:id="@+id/cartprize"
+            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
             android:text="120"/>
+
         <Button
             android:id="@+id/btn_gouwuche"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="结算"/>
+            android:text="结算"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:background="@drawable/btn_pay"/>
     </LinearLayout>
 </RelativeLayout>

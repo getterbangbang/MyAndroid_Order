@@ -95,4 +95,8 @@ public class UserService {
 		return userDao.findAllOrder();
 	}
 
+	public List<Map<String, Object>> getTableList() {
+		return userDao.findTableList();
+	}
+
 }

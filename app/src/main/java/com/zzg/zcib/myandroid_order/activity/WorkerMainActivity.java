@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.zzg.zcib.myandroid_order.R;
 import com.zzg.zcib.myandroid_order.fragment.ShouyeFragment;
+import com.zzg.zcib.myandroid_order.fragment.TableFragment;
 import com.zzg.zcib.myandroid_order.fragment.WodeFragment;
 import com.zzg.zcib.myandroid_order.fragment.GouwucheFragment;
 import com.zzg.zcib.myandroid_order.fragment.DingdanFragment;
@@ -43,6 +44,7 @@ public class WorkerMainActivity extends AppCompatActivity {
 
     private WorkerDingdanFragment workerDingdanFragment;
     private WodeFragment wodeFragment;
+    private TableFragment tableFragment;
     private String userid;
     private TextView titleText;
 
@@ -78,6 +80,15 @@ public class WorkerMainActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             allHide(fragmentTransaction);
             switch (checkedId){
+                case R.id.table:
+                    if (tableFragment ==null){
+                        tableFragment =new TableFragment();
+                        fragmentTransaction.add(R.id.fragment_content, tableFragment);
+                    }else {
+                        fragmentTransaction.show(tableFragment);
+                    }
+                    titleText.setText("餐桌状态");
+                    break;
                 case R.id.dingdan:
                     if (workerDingdanFragment ==null){
                         workerDingdanFragment =new WorkerDingdanFragment();
@@ -85,7 +96,7 @@ public class WorkerMainActivity extends AppCompatActivity {
                     }else {
                         fragmentTransaction.show(workerDingdanFragment);
                     }
-                    titleText.setText("我的订单");
+                    titleText.setText("全部订单");
                     break;
                 case R.id.wode:
                     if (wodeFragment ==null){
@@ -103,6 +114,9 @@ public class WorkerMainActivity extends AppCompatActivity {
 
 
     private void allHide(FragmentTransaction fragmentTransaction){
+        if (tableFragment !=null){
+            fragmentTransaction.hide(tableFragment);
+        }
         if (workerDingdanFragment !=null){
             fragmentTransaction.hide(workerDingdanFragment);
         }

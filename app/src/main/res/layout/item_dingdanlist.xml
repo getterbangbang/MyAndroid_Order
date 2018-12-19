@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
     <ImageView
         android:id="@+id/img_item_dingdan"
         android:layout_width="50dp"
@@ -19,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="大盘鸡"
             android:textColor="#000"
-            android:textSize="20dp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/time_item_dingdan"
             android:layout_width="wrap_content"

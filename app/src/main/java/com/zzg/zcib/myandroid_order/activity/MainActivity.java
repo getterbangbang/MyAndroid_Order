@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     }else {
                         fragmentTransaction.show(dingdanFragment);
                     }
-                    titleText.setText("我的订单");
+                    titleText.setText("订单");
                     break;
                 case R.id.wode:
                     if (wodeFragment ==null){
