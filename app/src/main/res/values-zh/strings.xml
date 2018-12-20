@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, JPush!</string>
-    <string name="app_name">JPush SDK Demo</string>
+    <string name="hello">Hello World!</string>
+    <string name="app_name">吃货</string>
     <string name="tag_hint">Tag为大小写字母，数字，下划线,中文， 多个用以逗号分隔</string>
     <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
     <string name="mobilenumber_hint">手机号只能以“+”或数字开头第二位开始只能包含“-”和数字</string>

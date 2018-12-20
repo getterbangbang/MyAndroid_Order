@@ -45,6 +45,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import static android.support.v4.os.LocaleListCompat.create;
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
 
 public class GouwucheFragment extends Fragment {
     private ListView gouwucheList;
@@ -122,7 +123,7 @@ public class GouwucheFragment extends Fragment {
                     @Override
                     public void run() {
                         super.run();
-                        String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                        String url=IP_+"/MyAndroid_Server_Order/userServlet";
                         HttpServer httpServer=new HttpServer();
 
                         String result=httpServer.postHtppByOkHttp(url,"creatOrder",jsonObject.toString());
@@ -143,7 +144,7 @@ public class GouwucheFragment extends Fragment {
             @Override
             public void run() {
                 super.run();
-                String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
                 HttpServer httpServer=new HttpServer();
 //                Log.d("dddddddddd",userid);
                 String result=httpServer.postHtppByOkHttp(url,"getCart",userid);

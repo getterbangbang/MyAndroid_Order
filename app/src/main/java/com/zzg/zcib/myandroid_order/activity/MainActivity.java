@@ -35,6 +35,8 @@ import java.util.Set;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
+
 public class MainActivity extends AppCompatActivity {
 
     private RadioGroup menuRadioGroup;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 HttpServer httpServer=new HttpServer();
-                String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
                 String result= httpServer.postHtppByOkHttp(url,"getTable",userid);
 
                 Message message=handler.obtainMessage();

@@ -14,6 +14,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class HttpServer {
+
+    public static String IP_="http://39.108.220.36:8080";
+//    public static String IP_="http://10.0.2.2:8080";
+
     public String getHtppByOkHttp(String url){
         String result=null;
         //创建okhttpClient对象

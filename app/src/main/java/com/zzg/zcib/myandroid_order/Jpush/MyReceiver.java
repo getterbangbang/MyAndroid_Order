@@ -54,7 +54,7 @@ public class MyReceiver extends BroadcastReceiver {
 			} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
 				Logger.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
-				Toast.makeText(context,"sssssssssssssssss",Toast.LENGTH_SHORT).show();
+//				Toast.makeText(context,"sssssssssssssssss",Toast.LENGTH_SHORT).show();
 
 				//打开自定义的Activity
 				Intent i = new Intent(context, DetailsActivity.class);

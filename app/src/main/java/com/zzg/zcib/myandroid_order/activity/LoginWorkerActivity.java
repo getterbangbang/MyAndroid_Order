@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
+
 public class LoginWorkerActivity extends AppCompatActivity {
     private EditText etUsername,etPassword;
     private Button button;
@@ -55,7 +57,7 @@ public class LoginWorkerActivity extends AppCompatActivity {
                 public void run() {
                     super.run();
                     HttpServer httpServer=new HttpServer();
-                    String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                    String url=IP_+"/MyAndroid_Server_Order/userServlet";
                     String result= httpServer.postHtppByOkHttp(url,"login",jsonObject.toString());
 
                     Message message=handler.obtainMessage();

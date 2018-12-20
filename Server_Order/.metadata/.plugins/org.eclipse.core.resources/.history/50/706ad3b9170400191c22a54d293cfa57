@@ -1,0 +1,414 @@
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import service.UserService;
+import utils.Jpush;
+
+import entity.User;
+
+public class UserServlet extends HttpServlet {
+	private UserService userService=new UserService();
+
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request,response);
+
+	}
+
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String action=request.getParameter("action");
+		
+		if("login".equals(action)){
+			login(request,response);
+		}else if("getAllDingdan".equals(action)){
+			getAllDingdan(request,response);
+		}else if("getHotList".equals(action)){
+			getHotList(request,response);
+		}else if("getTypeData".equals(action)){
+			getTypeData(request,response);
+		}else if("getOneMenu".equals(action)){
+			getOneMenu(request,response);
+		}else if("addCart".equals(action)){
+			addCart(request,response);
+		}else if("getCart".equals(action)){
+			getCart(request,response);
+		}else if("updateFoodCount".equals(action)){
+			updateFoodCount(request,response);
+		}else if("creatOrder".equals(action)){
+			creatOrder(request,response);
+		}else if("testpush".equals(action)){
+			testpush(request,response);
+		}else if("getOneOrder".equals(action)){
+			getOneOrder(request,response);
+		}else if("getOneOrderMenu".equals(action)){
+			getOneOrderMenu(request,response);
+		}else if("getTable".equals(action)){
+			getTable(request,response);
+		}else if("getWorkerAllDingdan".equals(action)){
+			getWorkerAllDingdan(request,response);
+		}else if("getTableList".equals(action)){
+			getTableList(request,response);
+		}else if("register".equals(action)){
+			register(request,response);
+		}
+
+
+	}
+	
+private void register(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+
+	
+	String username=json.getString("username");
+	String password=json.getString("password");
+	
+	int flag=userService.getTableList();
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTableList(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTableList();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getWorkerAllDingdan(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getWorkerAllDingdan();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTable(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTable();
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getOneOrderMenu(HttpServletRequest request,
+			HttpServletResponse response) {
+		String orderids=request.getParameter("s");
+		String[] ids=orderids.split(",");
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		for(int i=0;i<ids.length;i++){
+			System.out.println(ids[i]);
+			List<Map<String,Object>> list1=userService.getOneOrderMenu(ids[i]);
+			list.add(list1.get(0));
+		}
+		
+	
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		
+		
+		try {
+			response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+private void getOneOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+	String orderid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getOneOrder(orderid);
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void testpush(HttpServletRequest request,
+			HttpServletResponse response) {
+	Map<String, String> parm =new HashMap<String, String>();
+    //这是我的文章id
+    parm.put("id",(""+1).trim());
+    //文章标题
+    parm.put("Atitle","通知");
+    //设置提示信息,内容是文章标题
+    parm.put("msg","订单已完成！订单号：2");
+ 
+    //然后调用安卓的
+    Jpush.jpushOneAndroid(parm);
+		
+	}
+
+
+private void creatOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+
+	
+	String ordername=json.getString("ordername");
+	String userid=json.getString("userid");
+	String orderids=json.getString("orderids");
+	String prizesum=json.getString("prizesum");
+	String tableid=json.getString("tableid");
+	
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	Calendar calendar=Calendar.getInstance();
+	Date date=calendar.getTime();
+	String dateString=sdf.format(date);
+	
+	
+	
+	userService.creatOrder(ordername,userid,orderids,prizesum,dateString,tableid);
+		
+	}
+
+
+private void updateFoodCount(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+
+	
+	String count=json.getString("count");
+	String id=json.getString("id");
+	
+	userService.updateCartCount(id,count);
+		
+	}
+
+
+private void getCart(HttpServletRequest request,
+			HttpServletResponse response) {
+	String userid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getCart(userid);
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void addCart(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+
+	
+	String userid=json.getString("userid");
+	String foodid=json.getString("foodid");
+	
+	List<Map<String,Object>> list=userService.getCartCount(userid,foodid);
+	if(list==null||list.isEmpty()){
+		userService.addCart(userid, foodid);
+	}else{
+		userService.updateCart(list.get(0).get("id").toString(),list.get(0).get("count").toString());
+	}
+	
+	}
+
+
+private void getOneMenu(HttpServletRequest request,
+			HttpServletResponse response) {
+	String typeid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getOneMenu(typeid);
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTypeData(HttpServletRequest request,
+			HttpServletResponse response) {
+			List<Map<String,Object>> list=userService.getTypeList();
+		
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		
+		try {
+			response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+private void getHotList(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getHotList();
+	
+	
+//	JSONArray jsonArray=JSONArray.fromObject(list);
+	net.sf.json.JSONArray jsonArray=net.sf.json.JSONArray.fromObject(list);
+	System.out.println(jsonArray.toString());
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+
+
+
+private void getAllDingdan(HttpServletRequest request,
+			HttpServletResponse response) {
+	String userid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getAllDingdan(userid);
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void login(HttpServletRequest request, HttpServletResponse response) {
+		
+		String s=request.getParameter("s");
+		JSONObject json=new JSONObject(s);
+
+		
+		String username=json.getString("username");
+		String password=json.getString("password");
+		String role=json.getString("role");
+		System.out.println(role);
+		
+		User user=userService.login(username, password,role);
+		try {
+			if(user!=null){
+				response.getWriter().write(user.getId());
+			}else{
+				response.getWriter().write("no");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		//解决中文登录乱码
+//		try {
+//			username=URLDecoder.decode(URLDecoder.decode(username, "UTF-8"));
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//
+//		
+//		String password=request.getParameter("password");
+//		User user=userService.login(username,password);
+//		JSONObject jsonObject = new JSONObject();  //创建Json对象
+//		if(user!=null){
+//			
+//			jsonObject.put("username", user.getUsername());         //设置Json对象的属性
+//			jsonObject.put("password", user.getPassword());
+//			jsonObject.put("id", user.getId());
+//			
+//		}
+//		
+//		
+//		try {
+//			response.getWriter().write(jsonObject.toString());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		
+	}
+
+}

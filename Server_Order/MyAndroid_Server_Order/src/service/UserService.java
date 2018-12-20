@@ -99,4 +99,12 @@ public class UserService {
 		return userDao.findTableList();
 	}
 
+	public int register(String username, String password) {
+		return userDao.insertUser(username,password);
+	}
+
+	public int canRegister(String username) {
+		return userDao.findByUsername(username);
+	}
+
 }

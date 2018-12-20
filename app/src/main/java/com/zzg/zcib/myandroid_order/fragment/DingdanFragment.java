@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
+
 public class DingdanFragment extends Fragment {
     private List<Map<String ,Object>> list =new ArrayList<Map<String,Object>>();
     private DingdanAdapter dingdanAdapter;
@@ -76,7 +78,7 @@ public class DingdanFragment extends Fragment {
             @Override
             public void run() {
                 super.run();
-                String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
                 HttpServer httpServer=new HttpServer();
                 Log.d("dddddddddd",userid);
                 String result=httpServer.postHtppByOkHttp(url,"getAllDingdan",userid);

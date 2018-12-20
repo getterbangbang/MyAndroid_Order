@@ -24,6 +24,8 @@ import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
+
 public class DetailsActivity extends AppCompatActivity {
     private TextView name,no,price,statue,time,table;
     private ListView menuList;
@@ -75,7 +77,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 HttpServer httpServer=new HttpServer();
-                String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
                 String result= httpServer.postHtppByOkHttp(url,"getOneOrder",orderid);
 
                 Message message=handler.obtainMessage();
@@ -112,7 +114,7 @@ public class DetailsActivity extends AppCompatActivity {
             public void run() {
                 super.run();
                 HttpServer httpServer=new HttpServer();
-                String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
                 String result= httpServer.postHtppByOkHttp(url,"getOneOrderMenu",orderids);
 
                 Message message=handler2.obtainMessage();

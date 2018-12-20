@@ -72,11 +72,60 @@ public class UserServlet extends HttpServlet {
 			getWorkerAllDingdan(request,response);
 		}else if("getTableList".equals(action)){
 			getTableList(request,response);
+		}else if("register".equals(action)){
+			register(request,response);
+		}else if("canRegister".equals(action)){
+			canRegister(request,response);
 		}
 
 
 	}
 	
+private void canRegister(HttpServletRequest request,
+			HttpServletResponse response) {
+		String username=request.getParameter("s");
+		int flag=userService.canRegister(username);	
+		try {
+			if(flag==0){
+				response.getWriter().write("yes");
+			}else{
+				response.getWriter().write("no");
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+private void register(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+	System.out.println(json.getString("username"));
+	System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+	String username=json.getString("username");
+	String password=json.getString("password");
+	
+	int flag=userService.register(username,password);
+	
+	
+	try {
+		if(flag==0){
+			response.getWriter().write("no");
+		}else{
+			response.getWriter().write("yes");
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
 private void getTableList(HttpServletRequest request,
 			HttpServletResponse response) {
 	List<Map<String,Object>> list=userService.getTableList();

@@ -81,7 +81,7 @@ public class UserDao {
 		JDBCUtil.update(sql2,userid);
 		
 		String sql3="update table_ set isempty=1 where id=?";
-		JDBCUtil.update(sql2,tableid);
+		JDBCUtil.update(sql3,tableid);
 		
 		return a;
 		
@@ -115,6 +115,20 @@ public class UserDao {
 	public List<Map<String, Object>> findTableList() {
 		String sql="select * from table_";
 		return JDBCUtil.query(sql);
+	}
+
+	public int insertUser(String username, String password) {
+		String sql="insert into user(username,password,role) value(?,?,?)";
+		return JDBCUtil.update(sql,username,password,"customer");
+	}
+
+	public int findByUsername(String username) {
+		int flag=0;
+		String sql="select * from user where username =?";
+		if(JDBCUtil.query(sql,username)!=null&&!JDBCUtil.query(sql,username).isEmpty()){
+			flag=1;
+		}
+		return flag;
 	}
 	
 }

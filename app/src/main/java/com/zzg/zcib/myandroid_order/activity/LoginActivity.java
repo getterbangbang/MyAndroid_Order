@@ -17,9 +17,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsername,etPassword;
-    private Button button,goWorkerLogin;
+    private Button button,goWorkerLogin,btnToRegister;
     private String userid;
 
 
@@ -32,10 +34,21 @@ public class LoginActivity extends AppCompatActivity {
         etPassword=findViewById(R.id.login_password);
         button=findViewById(R.id.login_btn);
         goWorkerLogin=findViewById(R.id.btn_go_worker);
+        btnToRegister=findViewById(R.id.btn_toregister);
+        btnToRegister.setOnClickListener(new ToRegisterClick());
 
         button.setOnClickListener(new LoginClick());
         goWorkerLogin.setOnClickListener(new WorkerClick());
 
+    }
+
+    private class ToRegisterClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+            startActivity(intent);
+        }
     }
 
     private class WorkerClick implements View.OnClickListener{
@@ -67,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void run() {
                     super.run();
                     HttpServer httpServer=new HttpServer();
-                    String url="http://10.0.2.2:8080/MyAndroid_Server_Order/userServlet";
+                    String url=IP_+"/MyAndroid_Server_Order/userServlet";
                     String result= httpServer.postHtppByOkHttp(url,"login",jsonObject.toString());
 
                     Message message=handler.obtainMessage();
