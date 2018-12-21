@@ -76,31 +76,11 @@ public class UserServlet extends HttpServlet {
 			register(request,response);
 		}else if("canRegister".equals(action)){
 			canRegister(request,response);
-		}else if("clearTable".equals(action)){
-			clearTable(request,response);
-		}else if("deleteCartFood".equals(action)){
-			deleteCartFood(request,response);
 		}
-
 
 
 	}
 	
-private void deleteCartFood(HttpServletRequest request,
-			HttpServletResponse response) {
-	String id=request.getParameter("s");
-	userService.deleteCartFood(id);
-		
-	}
-
-
-private void clearTable(HttpServletRequest request,
-			HttpServletResponse response) {
-	String id=request.getParameter("s");
-	userService.clearTable(id);
-	}
-
-
 private void canRegister(HttpServletRequest request,
 			HttpServletResponse response) {
 		String username=request.getParameter("s");

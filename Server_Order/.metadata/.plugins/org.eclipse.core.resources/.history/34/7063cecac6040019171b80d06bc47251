@@ -107,14 +107,4 @@ public class UserService {
 		return userDao.findByUsername(username);
 	}
 
-	public void clearTable(String id) {
-		userDao.updateTableStatue(id);
-		
-	}
-
-	public void deleteCartFood(String id) {
-		userDao.deleteCartFoodById(id);
-		
-	}
-
 }

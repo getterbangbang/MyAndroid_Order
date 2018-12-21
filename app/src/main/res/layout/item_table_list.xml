@@ -5,7 +5,7 @@
     android:padding="5dp">
 
     <TextView
-
+        android:layout_centerVertical="true"
         android:id="@+id/item_table_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,12 +13,24 @@
         android:textSize="18sp"/>
 
     <TextView
+        android:layout_centerVertical="true"
         android:id="@+id/item_table_statue"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/item_table_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="状态：空"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:layout_marginRight="5dp"/>
+    <Button
+        android:layout_centerVertical="true"
+        android:id="@+id/item_table_btn"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清桌"
+        android:textSize="18sp"
+        android:background="@null"
+        android:textColor="#000"/>
 
 
 </RelativeLayout>

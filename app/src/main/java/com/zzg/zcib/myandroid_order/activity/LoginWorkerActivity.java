@@ -21,7 +21,7 @@ import static com.zzg.zcib.myandroid_order.utils.HttpServer.IP_;
 
 public class LoginWorkerActivity extends AppCompatActivity {
     private EditText etUsername,etPassword;
-    private Button button;
+    private Button button,btnBack;
     private String userid;
 
 
@@ -32,9 +32,18 @@ public class LoginWorkerActivity extends AppCompatActivity {
         etUsername=findViewById(R.id.worker_login_username);
         etPassword=findViewById(R.id.worker_login_password);
         button=findViewById(R.id.worker_login_btn);
+        btnBack=findViewById(R.id.worker_btn_back);
+        btnBack.setOnClickListener(new BackClick());
 
         button.setOnClickListener(new LoginClick());
+    }
 
+    private class BackClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
     }
 
     private class LoginClick implements View.OnClickListener{
@@ -80,6 +89,7 @@ public class LoginWorkerActivity extends AppCompatActivity {
                 Toast.makeText(LoginWorkerActivity.this,"登录成功",Toast.LENGTH_LONG).show();
                 userid=msg.obj.toString();
                 intent.putExtra("userid",userid);
+                intent.putExtra("username",etUsername.getText().toString());
                 startActivity(intent);
             }
 

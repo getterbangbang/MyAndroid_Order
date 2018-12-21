@@ -103,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_LONG).show();
                 userid=msg.obj.toString();
                 intent.putExtra("userid",userid);
+                intent.putExtra("username",etUsername.getText().toString());
                 startActivity(intent);
             }
 

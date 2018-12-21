@@ -136,13 +136,5 @@ public class UserDao {
 		JDBCUtil.update(sql,id);
 		
 	}
-
-	public void deleteCartFoodById(String id) {
-		String sql="delete from cart where id =?";
-		JDBCUtil.update(sql,id);
-		
-	}
-
-
 	
 }

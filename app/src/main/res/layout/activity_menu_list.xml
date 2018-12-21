@@ -4,11 +4,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/typelist"
+        <LinearLayout
+
+            android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"></ListView>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="分类"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="#000"
+                android:background="@drawable/border_bottom"/>
+            <ListView
+                android:id="@+id/typelist"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"></ListView>
+        </LinearLayout>
+
         <ListView
             android:id="@+id/menulist"
             android:layout_width="0dp"

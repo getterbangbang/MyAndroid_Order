@@ -112,9 +112,4 @@ public class UserService {
 		
 	}
 
-	public void deleteCartFood(String id) {
-		userDao.deleteCartFoodById(id);
-		
-	}
-
 }

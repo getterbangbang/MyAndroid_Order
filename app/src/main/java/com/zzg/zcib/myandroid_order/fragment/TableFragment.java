@@ -35,6 +35,12 @@ public class TableFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_table,container,false);
         listView=view.findViewById(R.id.tablelist);
         tableAdapter=new TableAdapter(getContext(),list);
+        tableAdapter.setReflushListener(new TableAdapter.ReflushListener() {
+            @Override
+            public void onFlush() {
+                initData();
+            }
+        });
         listView.setAdapter(tableAdapter);
 
         swipeRefreshLayout=view.findViewById(R.id.swipe_refresh_table);
@@ -56,7 +62,7 @@ public class TableFragment extends Fragment {
         }
     }
 
-    private void initData(){
+    public void initData(){
         new Thread(){
             @Override
             public void run() {

@@ -81,14 +81,40 @@ public class GouwucheAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int count=Integer.parseInt(countTextView.getText().toString())-1;
-                viewHolder.count.setText(count+"");
-                viewHolder.prizeSum.setText(count*Integer.parseInt(list.get(position).get("prize").toString())+"");
-                GouwucheFragment.gouwuchePrize.setText(Integer.parseInt(GouwucheFragment.gouwuchePrize.getText().toString())-Integer.parseInt(list.get(position).get("prize").toString())+"");
-                setCount(list.get(position).get("id").toString(),count+"");
+                if (count==0){
+                    deleteCartFood(list.get(position).get("id").toString());
+                    list.remove(position);
+                    notifyDataSetChanged();
+                    GouwucheFragment.gouwuchePrize.setText("0");
+
+                }else{
+                    viewHolder.count.setText(count+"");
+                    viewHolder.prizeSum.setText(count*Integer.parseInt(list.get(position).get("prize").toString())+"");
+                    GouwucheFragment.gouwuchePrize.setText(Integer.parseInt(GouwucheFragment.gouwuchePrize.getText().toString())-Integer.parseInt(list.get(position).get("prize").toString())+"");
+                    setCount(list.get(position).get("id").toString(),count+"");
+                }
+
             }
         });
 
         return convertView;
+    }
+
+    private void deleteCartFood(final String id){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                HttpServer httpServer=new HttpServer();
+                String url=IP_+"/MyAndroid_Server_Order/userServlet";
+                String result= httpServer.postHtppByOkHttp(url,"deleteCartFood",id);
+
+//                        Message message=handler.obtainMessage();
+//                        message.obj=result;
+//                        handler.sendMessage(message);
+            }
+
+        }.start();
     }
 
     private void setCount(String id,String count){

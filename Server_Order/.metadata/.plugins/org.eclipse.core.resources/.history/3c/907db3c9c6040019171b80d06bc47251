@@ -130,19 +130,5 @@ public class UserDao {
 		}
 		return flag;
 	}
-
-	public void updateTableStatue(String id) {
-		String sql="update table_ set isempty=0 where id=?";
-		JDBCUtil.update(sql,id);
-		
-	}
-
-	public void deleteCartFoodById(String id) {
-		String sql="delete from cart where id =?";
-		JDBCUtil.update(sql,id);
-		
-	}
-
-
 	
 }

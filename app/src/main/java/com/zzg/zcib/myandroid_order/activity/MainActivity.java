@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinner;
     private List<String> data_list;
     private ArrayAdapter<String> arr_adapter;
-    public static String tableid;
+    public static String tableid,username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         userid=getIntent().getExtras().getString("userid");
+        username=getIntent().getExtras().getString("username");
 //        Log.d("aaaaaaa",userid);
         menuRadioGroup.setOnCheckedChangeListener(new RadioChangeClick());
         firstRadio.setChecked(true);
@@ -137,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
 
     public String getUserid(){
         return userid;
+    }
+    public String getUsername(){
+        return username;
     }
 
     private class RadioChangeClick implements RadioGroup.OnCheckedChangeListener{

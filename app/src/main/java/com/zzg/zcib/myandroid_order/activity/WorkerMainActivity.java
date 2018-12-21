@@ -45,7 +45,7 @@ public class WorkerMainActivity extends AppCompatActivity {
     private WorkerDingdanFragment workerDingdanFragment;
     private WodeFragment wodeFragment;
     private TableFragment tableFragment;
-    private String userid;
+    private String userid,username;
     private TextView titleText;
 
 
@@ -62,11 +62,16 @@ public class WorkerMainActivity extends AppCompatActivity {
 
 
         userid=getIntent().getExtras().getString("userid");
+        username=getIntent().getExtras().getString("username");
 //        Log.d("aaaaaaa",userid);
         menuRadioGroup.setOnCheckedChangeListener(new RadioChangeClick());
         firstRadio.setChecked(true);
         setTagAndAlias();
 
+    }
+
+    public String getUsername(){
+        return username;
     }
 
     public String getUserid(){

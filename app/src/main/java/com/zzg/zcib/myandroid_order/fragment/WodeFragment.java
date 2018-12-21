@@ -1,5 +1,6 @@
 package com.zzg.zcib.myandroid_order.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.zzg.zcib.myandroid_order.R;
 import com.zzg.zcib.myandroid_order.activity.LoginActivity;
 import com.zzg.zcib.myandroid_order.activity.MainActivity;
+import com.zzg.zcib.myandroid_order.activity.WorkerMainActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,13 +26,17 @@ import cn.jpush.android.api.TagAliasCallback;
 
 public class WodeFragment extends Fragment {
     private Button btnLogout;
+    private TextView nameText;
+    private String username;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_wode,container,false);
 
         btnLogout=view.findViewById(R.id.btn_logout);
+        nameText=view.findViewById(R.id.myname);
         btnLogout.setOnClickListener(new LogoutClick());
+        nameText.setText(username);
         return view;
     }
 
@@ -76,6 +83,36 @@ public class WodeFragment extends Fragment {
             }
         }
     };
+
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        nameText.setText(username);
+//    }
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        nameText.setText(username);
+//    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (getRunningActivityName().equals("MainActivity")){
+            username = ((MainActivity) activity).getUsername();
+        }else {
+            username = ((WorkerMainActivity) activity).getUsername();
+        }
+        System.out.println(username);
+
+
+    }
+
+    private String getRunningActivityName() {
+        String contextString = getActivity().toString();
+        return contextString.substring(contextString.lastIndexOf(".") + 1, contextString.indexOf("@"));
+    }
 
 
 }
