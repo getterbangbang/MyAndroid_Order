@@ -5,8 +5,10 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +21,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import service.UserService;
+import utils.Jpush;
 
 import entity.User;
 
@@ -57,11 +60,200 @@ public class UserServlet extends HttpServlet {
 			updateFoodCount(request,response);
 		}else if("creatOrder".equals(action)){
 			creatOrder(request,response);
+		}else if("testpush".equals(action)){
+			testpush(request,response);
+		}else if("getOneOrder".equals(action)){
+			getOneOrder(request,response);
+		}else if("getOneOrderMenu".equals(action)){
+			getOneOrderMenu(request,response);
+		}else if("getTable".equals(action)){
+			getTable(request,response);
+		}else if("getWorkerAllDingdan".equals(action)){
+			getWorkerAllDingdan(request,response);
+		}else if("getTableList".equals(action)){
+			getTableList(request,response);
+		}else if("register".equals(action)){
+			register(request,response);
+		}else if("canRegister".equals(action)){
+			canRegister(request,response);
+		}else if("clearTable".equals(action)){
+			clearTable(request,response);
+		}else if("deleteCartFood".equals(action)){
+			deleteCartFood(request,response);
 		}
+
 
 
 	}
 	
+private void deleteCartFood(HttpServletRequest request,
+			HttpServletResponse response) {
+	String id=request.getParameter("s");
+	userService.deleteCartFood(id);
+		
+	}
+
+
+private void clearTable(HttpServletRequest request,
+			HttpServletResponse response) {
+	String id=request.getParameter("s");
+	userService.clearTable(id);
+	}
+
+
+private void canRegister(HttpServletRequest request,
+			HttpServletResponse response) {
+		String username=request.getParameter("s");
+		int flag=userService.canRegister(username);	
+		try {
+			if(flag==0){
+				response.getWriter().write("yes");
+			}else{
+				response.getWriter().write("no");
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+private void register(HttpServletRequest request,
+			HttpServletResponse response) {
+	String s=request.getParameter("s");
+	JSONObject json=new JSONObject(s);
+	System.out.println(json.getString("username"));
+	System.out.println("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+	String username=json.getString("username");
+	String password=json.getString("password");
+	
+	int flag=userService.register(username,password);
+	
+	
+	try {
+		if(flag==0){
+			response.getWriter().write("no");
+		}else{
+			response.getWriter().write("yes");
+		}
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTableList(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTableList();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getWorkerAllDingdan(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getWorkerAllDingdan();
+	
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getTable(HttpServletRequest request,
+			HttpServletResponse response) {
+	List<Map<String,Object>> list=userService.getTable();
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void getOneOrderMenu(HttpServletRequest request,
+			HttpServletResponse response) {
+		String orderids=request.getParameter("s");
+		String[] ids=orderids.split(",");
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
+		for(int i=0;i<ids.length;i++){
+			System.out.println(ids[i]);
+			List<Map<String,Object>> list1=userService.getOneOrderMenu(ids[i]);
+			list.add(list1.get(0));
+		}
+		
+	
+		JSONArray jsonArray=JSONArray.fromObject(list);
+		
+		
+		try {
+			response.getWriter().write(jsonArray.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+private void getOneOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+	String orderid=request.getParameter("s");
+	List<Map<String,Object>> list=userService.getOneOrder(orderid);
+
+	JSONArray jsonArray=JSONArray.fromObject(list);
+	
+	
+	try {
+		response.getWriter().write(jsonArray.toString());
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+		
+	}
+
+
+private void testpush(HttpServletRequest request,
+			HttpServletResponse response) {
+	Map<String, String> parm =new HashMap<String, String>();
+    //这是我的文章id
+    parm.put("id",(""+1).trim());
+    //文章标题
+    parm.put("Atitle","通知");
+    //设置提示信息,内容是文章标题
+    parm.put("msg","订单已完成！订单号：2");
+ 
+    //然后调用安卓的
+    Jpush.jpushOneAndroid(parm);
+		
+	}
+
+
 private void creatOrder(HttpServletRequest request,
 			HttpServletResponse response) {
 	String s=request.getParameter("s");
@@ -70,8 +262,9 @@ private void creatOrder(HttpServletRequest request,
 	
 	String ordername=json.getString("ordername");
 	String userid=json.getString("userid");
-	String foodids=json.getString("foodids");
+	String orderids=json.getString("orderids");
 	String prizesum=json.getString("prizesum");
+	String tableid=json.getString("tableid");
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	Calendar calendar=Calendar.getInstance();
@@ -80,7 +273,7 @@ private void creatOrder(HttpServletRequest request,
 	
 	
 	
-	userService.creatOrder(ordername,userid,foodids,prizesum,dateString);
+	userService.creatOrder(ordername,userid,orderids,prizesum,dateString,tableid);
 		
 	}
 
@@ -217,8 +410,10 @@ private void login(HttpServletRequest request, HttpServletResponse response) {
 		
 		String username=json.getString("username");
 		String password=json.getString("password");
+		String role=json.getString("role");
+		System.out.println(role);
 		
-		User user=userService.login(username, password);
+		User user=userService.login(username, password,role);
 		try {
 			if(user!=null){
 				response.getWriter().write(user.getId());

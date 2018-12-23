@@ -1,6 +1,9 @@
 package com.zzg.zcib.myandroid_order.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzg.zcib.myandroid_order.R;
+import com.zzg.zcib.myandroid_order.activity.LoginWorkerActivity;
+import com.zzg.zcib.myandroid_order.activity.WorkerMainActivity;
 import com.zzg.zcib.myandroid_order.utils.HttpServer;
 
 import org.json.JSONException;
@@ -26,6 +31,7 @@ public class MenuListAdapter extends BaseAdapter {
     private Context context;
     private List<Map<String,Object>> list;
     private String userid;
+//    private ImageView imageView;
 
     public MenuListAdapter(Context context, List<Map<String, Object>> list,String userid) {
         this.context = context;
@@ -64,7 +70,25 @@ public class MenuListAdapter extends BaseAdapter {
             viewHolder= (ViewHolder) convertView.getTag();
         }
 
+//        imageView=viewHolder.img;
         viewHolder.img.setBackgroundResource(R.drawable.cai);
+//        new Thread(){
+//            @Override
+//            public void run() {
+//                super.run();
+//                HttpServer httpServer=new HttpServer();
+//                String url=IP_+"/MyAndroid_Server_Order/imgs/a.jpg";
+//                Bitmap result= httpServer.getBitmapByOkHttp(url);
+//
+//                        Message message=handler.obtainMessage();
+//                        message.obj=result;
+//                        handler.sendMessage(message);
+//            }
+//
+//        }.start();
+
+
+
         viewHolder.name.setText(list.get(position).get("foodname").toString());
         viewHolder.sales.setText("销量："+list.get(position).get("sales").toString());
         viewHolder.prize.setText("¥"+list.get(position).get("prize").toString());
@@ -107,4 +131,13 @@ public class MenuListAdapter extends BaseAdapter {
         private TextView prize;
         private Button buyBtn;
     }
+
+//    Handler handler=new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//
+//            imageView.setImageBitmap((Bitmap) msg.obj);
+//        }
+//    };
 }

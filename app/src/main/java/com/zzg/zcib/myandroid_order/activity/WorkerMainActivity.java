@@ -56,11 +56,6 @@ public class WorkerMainActivity extends AppCompatActivity {
         menuRadioGroup=findViewById(R.id.radio_group_bottom);
         firstRadio=findViewById(R.id.dingdan);
         titleText=findViewById(R.id.title_main);
-
-
-
-
-
         userid=getIntent().getExtras().getString("userid");
         username=getIntent().getExtras().getString("username");
 //        Log.d("aaaaaaa",userid);

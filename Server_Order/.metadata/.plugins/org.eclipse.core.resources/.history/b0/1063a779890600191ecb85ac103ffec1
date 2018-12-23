@@ -143,12 +143,6 @@ public class UserDao {
 		
 	}
 
-	public void deleteOrderById(String id) {
-		String sql="delete from orders where id =?";
-		JDBCUtil.update(sql,id);
-		
-	}
-
 
 	
 }

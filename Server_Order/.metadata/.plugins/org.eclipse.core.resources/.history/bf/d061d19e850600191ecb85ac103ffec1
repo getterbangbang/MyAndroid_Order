@@ -93,7 +93,7 @@ public class UserDao {
 	}
 
 	public List<Map<String, Object>> findOrderMenuById(String cartid) {
-		String sql="select a.count,b.foodname,b.prize,b.img from cart as a,menu as b where a.id=? and a.foodid=b.id";
+		String sql="select a.count,b.foodname,b.prize from cart as a,menu as b where a.id=? and a.foodid=b.id";
 		return JDBCUtil.query(sql, cartid);
 	}
 
@@ -139,12 +139,6 @@ public class UserDao {
 
 	public void deleteCartFoodById(String id) {
 		String sql="delete from cart where id =?";
-		JDBCUtil.update(sql,id);
-		
-	}
-
-	public void deleteOrderById(String id) {
-		String sql="delete from orders where id =?";
 		JDBCUtil.update(sql,id);
 		
 	}

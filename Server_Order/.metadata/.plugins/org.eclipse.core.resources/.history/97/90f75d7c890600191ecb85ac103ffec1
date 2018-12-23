@@ -117,9 +117,4 @@ public class UserService {
 		
 	}
 
-	public void delOrder(String id) {
-		userDao.deleteOrderById(id);
-		
-	}
-
 }

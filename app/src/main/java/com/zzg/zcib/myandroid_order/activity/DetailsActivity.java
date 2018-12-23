@@ -5,8 +5,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class DetailsActivity extends AppCompatActivity {
     private DetailsAdapter detailsAdapter;
     private String orderid;
     private String orderids;
+    private Button delBtn;
 
 
 
@@ -49,7 +52,9 @@ public class DetailsActivity extends AppCompatActivity {
         time=findViewById(R.id.details_time);
         menuList=findViewById(R.id.details_menu_list);
         table=findViewById(R.id.details_table);
+        delBtn=findViewById(R.id.details_btn_del);
 
+        delBtn.setOnClickListener(new DelClick());
         detailsAdapter=new DetailsAdapter(DetailsActivity.this,list);
         menuList.setAdapter(detailsAdapter);
 
@@ -69,6 +74,24 @@ public class DetailsActivity extends AppCompatActivity {
         }
         initData();
 
+    }
+    private class DelClick implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    HttpServer httpServer=new HttpServer();
+                    String url=IP_+"/MyAndroid_Server_Order/userServlet";
+                    String result= httpServer.postHtppByOkHttp(url,"delOrder",orderid);
+                    System.out.println("tttttttttttttttt"+orderid);
+                }
+
+            }.start();
+            finish();
+        }
     }
 
     private void initData(){

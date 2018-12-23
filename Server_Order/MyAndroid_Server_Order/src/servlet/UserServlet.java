@@ -80,12 +80,23 @@ public class UserServlet extends HttpServlet {
 			clearTable(request,response);
 		}else if("deleteCartFood".equals(action)){
 			deleteCartFood(request,response);
+		}else if("delOrder".equals(action)){
+			delOrder(request,response);
 		}
 
 
 
 	}
 	
+private void delOrder(HttpServletRequest request,
+			HttpServletResponse response) {
+	String id=request.getParameter("s");
+	System.out.println(id);
+	userService.delOrder(id);
+		
+	}
+
+
 private void deleteCartFood(HttpServletRequest request,
 			HttpServletResponse response) {
 	String id=request.getParameter("s");
